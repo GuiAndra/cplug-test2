@@ -35,6 +35,7 @@
                         </div>
                     </transition>
                     <select multiple class="form-control" v-model="form.tags">
+                        <option value=""></option>
                         <option v-for="tag in this.$store.state.tags" :key="tag.id" :value="tag.id">{{ tag.titulo }}</option>
                     </select>
                 </div>
@@ -77,6 +78,10 @@
 
         methods: {
             addNoticia () {
+                if(this.form.titulo == '' || this.form.descricao == '' || this.form.categoria_id == ''){
+                    alert('Preencha corretamente os campos')
+                    return
+                }
                 axios.post('/noticias', this.form)
                 .then(function (response) {
                     if(response.data.created === 'success'){

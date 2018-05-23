@@ -26,6 +26,10 @@
 
         methods: {
             addCategoria () {
+                if(this.form.titulo == ''){
+                    alert('Categoria nao pode ficar vazia')
+                    return
+                }
                 this.$store.dispatch('addCategoria', this.form)
                 this.$emit('closeCategoria')
             }

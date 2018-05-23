@@ -26,6 +26,10 @@
         
         methods: {
             addTag () {
+                if(this.form.titulo == ''){
+                    alert('Tag nao pode ficar vazio')
+                    return
+                }
                 this.$store.dispatch('addTag', this.form)
                 this.$emit('closeTag')
             }
