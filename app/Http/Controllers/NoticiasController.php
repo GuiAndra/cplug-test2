@@ -123,6 +123,14 @@ class NoticiasController extends Controller
     public function destroy($id)
     {
         $noticia = Noticias::findOrFail($id);
+        if($noticia->imagens){
+            foreach($noticia->imagens as $imagem){
+                $image_path = public_path('images/').$imagem->url;
+                if(\File::exists($image_path)) {
+                    \File::delete($image_path);
+                }
+            }
+        }
         $noticia->delete();
         return response()->json(['deleted' => 'success']);
     }
